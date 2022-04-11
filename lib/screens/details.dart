@@ -3,7 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:shoestoreui/models/shoe.dart';
 import 'package:shoestoreui/utils/theme.dart';
+import 'package:shoestoreui/widgets/add_to_cart.dart';
+import 'package:shoestoreui/widgets/buy_now.dart';
 import 'package:shoestoreui/widgets/fav_button.dart';
+import 'package:shoestoreui/widgets/rating.dart';
+import 'package:shoestoreui/widgets/selection_button.dart';
 
 class ShoeDetails extends StatefulWidget {
   final Shoe shoe;
@@ -95,31 +99,7 @@ class _ShoeDetailsState extends State<ShoeDetails> {
               const SizedBox(
                 height: 10,
               ),
-              Row(
-                children: [
-                  for (int i = 0; i < 5; i++) ...[
-                    Icon(
-                      widget.shoe.rating.floor() > i
-                          ? Icons.star
-                          : Icons.star_outline,
-                      color: widget.shoe.rating.floor() > i
-                          ? Colors.amber
-                          : Colors.grey,
-                      size: 18,
-                    ),
-                  ],
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    '(${widget.shoe.rating})',
-                    style: const TextStyle(),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                ],
-              ),
+              Rating(rating: widget.shoe.rating),
               const SizedBox(
                 height: 20,
               ),
@@ -136,31 +116,15 @@ class _ShoeDetailsState extends State<ShoeDetails> {
               ),
               const Text("Sizes"),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               Row(
                 children: widget.shoe.sizes
                     .map(
-                      (e) => TextButton(
-                        onPressed: () {
-                          updateSelectedSize(e);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("$e"),
-                        ),
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.resolveWith(
-                            (states) => CircleBorder(
-                              side: BorderSide(
-                                color: _selectedSize == e
-                                    ? StoreTheme.primaryColor
-                                    : StoreTheme.grey,
-                                width: 2,
-                              ),
-                            ),
-                          ),
-                        ),
+                      (e) => SelectionButton<int>(
+                        value: e,
+                        selectedValue: _selectedSize,
+                        updateValue: updateSelectedSize,
                       ),
                     )
                     .toList(),
@@ -170,29 +134,15 @@ class _ShoeDetailsState extends State<ShoeDetails> {
               ),
               const Text("Colors"),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               Row(
                 children: widget.shoe.colors
                     .map(
-                      (e) => TextButton(
-                        onPressed: () {
-                          updateSelectedColor(e);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: e == _selectedColor
-                              ? const Icon(Icons.done)
-                              : const Text(""),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.resolveWith(
-                            (states) => e,
-                          ),
-                          shape: MaterialStateProperty.resolveWith(
-                            (states) => const CircleBorder(),
-                          ),
-                        ),
+                      (e) => SelectionButton<Color>(
+                        value: e,
+                        selectedValue: _selectedColor,
+                        updateValue: updateSelectedColor,
                       ),
                     )
                     .toList(),
@@ -200,57 +150,10 @@ class _ShoeDetailsState extends State<ShoeDetails> {
               const Spacer(),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 150,
-                    child: TextButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(Icons.shopping_cart),
-                      label: const Text("Add to Cart"),
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.resolveWith(
-                          (states) => RoundedRectangleBorder(
-                            side: const BorderSide(color: StoreTheme.grey),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        padding: MaterialStateProperty.resolveWith(
-                          (states) => const EdgeInsets.all(12),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  SizedBox(
-                    width: 150,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text("Buy Now"),
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.resolveWith(
-                          (states) => RoundedRectangleBorder(
-                            side: const BorderSide(color: StoreTheme.grey),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        padding: MaterialStateProperty.resolveWith(
-                          (states) => const EdgeInsets.all(16),
-                        ),
-                        backgroundColor: MaterialStateProperty.resolveWith(
-                          (states) => StoreTheme.primaryColor,
-                        ),
-                        foregroundColor: MaterialStateProperty.resolveWith(
-                          (states) => StoreTheme.white,
-                        ),
-                        overlayColor: MaterialStateProperty.resolveWith(
-                          (states) => StoreTheme.white.withAlpha(40),
-                        ),
-                      ),
-                    ),
-                  ),
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: const [
+                  AddToCart(),
+                  BuyNow(),
                 ],
               )
             ],
