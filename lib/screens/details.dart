@@ -50,7 +50,8 @@ class _ShoeDetailsState extends State<ShoeDetails> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
                 width: MediaQuery.of(context).size.width,
                 height: 250,
                 child: Stack(
@@ -131,7 +132,7 @@ class _ShoeDetailsState extends State<ShoeDetails> {
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               const Text("Sizes"),
               const SizedBox(
@@ -196,64 +197,65 @@ class _ShoeDetailsState extends State<ShoeDetails> {
                     )
                     .toList(),
               ),
+              const Spacer(),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 150,
+                    child: TextButton.icon(
+                      onPressed: () {},
+                      icon: const Icon(Icons.shopping_cart),
+                      label: const Text("Add to Cart"),
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.resolveWith(
+                          (states) => RoundedRectangleBorder(
+                            side: const BorderSide(color: StoreTheme.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        padding: MaterialStateProperty.resolveWith(
+                          (states) => const EdgeInsets.all(12),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  SizedBox(
+                    width: 150,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Text("Buy Now"),
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.resolveWith(
+                          (states) => RoundedRectangleBorder(
+                            side: const BorderSide(color: StoreTheme.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        padding: MaterialStateProperty.resolveWith(
+                          (states) => const EdgeInsets.all(16),
+                        ),
+                        backgroundColor: MaterialStateProperty.resolveWith(
+                          (states) => StoreTheme.primaryColor,
+                        ),
+                        foregroundColor: MaterialStateProperty.resolveWith(
+                          (states) => StoreTheme.white,
+                        ),
+                        overlayColor: MaterialStateProperty.resolveWith(
+                          (states) => StoreTheme.white.withAlpha(40),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
-      ),
-      floatingActionButton: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: 150,
-            child: TextButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.shopping_cart),
-              label: const Text("Add to Cart"),
-              style: ButtonStyle(
-                shape: MaterialStateProperty.resolveWith(
-                  (states) => RoundedRectangleBorder(
-                    side: const BorderSide(color: StoreTheme.grey),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                padding: MaterialStateProperty.resolveWith(
-                  (states) => const EdgeInsets.all(12),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(
-            width: 20,
-          ),
-          SizedBox(
-            width: 150,
-            child: TextButton(
-              onPressed: () {},
-              child: const Text("Buy Now"),
-              style: ButtonStyle(
-                shape: MaterialStateProperty.resolveWith(
-                  (states) => RoundedRectangleBorder(
-                    side: const BorderSide(color: StoreTheme.grey),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                padding: MaterialStateProperty.resolveWith(
-                  (states) => const EdgeInsets.all(16),
-                ),
-                backgroundColor: MaterialStateProperty.resolveWith(
-                  (states) => StoreTheme.primaryColor,
-                ),
-                foregroundColor: MaterialStateProperty.resolveWith(
-                  (states) => StoreTheme.white,
-                ),
-                overlayColor: MaterialStateProperty.resolveWith(
-                  (states) => StoreTheme.white.withAlpha(40),
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
