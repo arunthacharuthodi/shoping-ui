@@ -33,22 +33,25 @@ class HomeState extends State<Home> {
         body: Column(
           children: [
             const StoreSearch(),
-            TabBar(
-              isScrollable: true,
-              tabs: const [
-                Tab(text: 'All Shoes'),
-                Tab(text: 'New Arrivals'),
-                Tab(text: 'Best Sellers'),
-                Tab(text: 'Running'),
-                Tab(text: 'Jordan'),
-                Tab(text: 'Casual'),
-              ],
-              indicator: BoxDecoration(
-                color: StoreTheme.primaryColor,
-                borderRadius: BorderRadius.circular(100),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TabBar(
+                isScrollable: true,
+                tabs: const [
+                  Tab(text: 'All Shoes'),
+                  Tab(text: 'New Arrivals'),
+                  Tab(text: 'Best Sellers'),
+                  Tab(text: 'Running'),
+                  Tab(text: 'Jordan'),
+                  Tab(text: 'Casual'),
+                ],
+                indicator: BoxDecoration(
+                  color: StoreTheme.primaryColor,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                labelColor: StoreTheme.white,
+                unselectedLabelColor: StoreTheme.black,
               ),
-              labelColor: StoreTheme.white,
-              unselectedLabelColor: StoreTheme.black,
             ),
             const SizedBox(
               height: 10,
