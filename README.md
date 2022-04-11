@@ -1,4 +1,4 @@
-# Real Estate App UI
+# Shoe Store UI
 [![](https://img.shields.io/badge/FlutterEveryday-Day%204-blue.svg)](https://github.com/HeySreelal/Flutter-Everyday)
 
 On the fourth day, I've done this Shoes Store UI by [@byrktrdesign](https://www.instagram.com/byrktrdesign/).
