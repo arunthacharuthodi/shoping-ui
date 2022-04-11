@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shoestoreui/config/data.dart';
+import 'package:shoestoreui/models/shoe.dart';
+import 'package:shoestoreui/screens/details.dart';
+import 'package:shoestoreui/utils/slide.dart';
 import 'package:shoestoreui/utils/theme.dart';
+import 'package:shoestoreui/widgets/fav_button.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -56,85 +60,74 @@ class HomeState extends State<Home> {
                 shrinkWrap: true,
                 children: ShoeStore.shoes
                     .map(
-                      (e) => GridTile(
-                        header: SizedBox(
-                          child: Container(
-                            alignment: Alignment.centerLeft,
-                            child: TextButton(
-                              onPressed: () {
-                                e.updateFavourite();
-                                setState(() {});
-                              },
-                              child: Icon(
-                                Icons.favorite,
-                                color: e.isFavorite
-                                    ? StoreTheme.primaryColor
-                                    : StoreTheme.black,
-                              ),
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.resolveWith(
-                                  (states) => const CircleBorder(),
-                                ),
-                                backgroundColor:
-                                    MaterialStateProperty.resolveWith(
-                                  (states) => StoreTheme.grey,
-                                ),
-                              ),
-                            ),
+                      (e) => GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            slidingRoute(ShoeDetails(e)),
+                          );
+                        },
+                        child: GridTile(
+                          header: FavButton(
+                            e,
+                            onTap: () {
+                              e.updateFavourite();
+                              setState(() {});
+                            },
                           ),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  color: StoreTheme.whitish,
-                                ),
-                                child: Center(
-                                  child: Hero(
-                                    tag: "shoe-${e.name}",
-                                    child: Image(
-                                      image: AssetImage(
-                                        e.path,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    color: StoreTheme.whitish,
+                                  ),
+                                  child: Center(
+                                    child: Hero(
+                                      tag: "shoe-${e.name}",
+                                      child: Image(
+                                        image: AssetImage(
+                                          e.path,
+                                        ),
+                                        fit: BoxFit.fitWidth,
                                       ),
-                                      fit: BoxFit.fitWidth,
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 5,
+                              const SizedBox(
+                                height: 10,
                               ),
-                              child: Text(
-                                e.name,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                              ),
-                              child: Text(
-                                '\$${e.price}',
-                                style: const TextStyle(
-                                  color: StoreTheme.primaryColor,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 5,
+                                ),
+                                child: Text(
+                                  e.name,
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                          ],
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                ),
+                                child: Text(
+                                  '\$${e.price}',
+                                  style: const TextStyle(
+                                    color: StoreTheme.primaryColor,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     )
