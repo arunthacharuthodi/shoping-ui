@@ -1,16 +1,18 @@
-import 'dart:math';
-
+import 'package:ekraft/screens/auth.dart';
+import 'package:ekraft/utils/confirm.dart';
 import 'package:flutter/material.dart';
-import 'package:shoestoreui/models/shoe.dart';
-import 'package:shoestoreui/utils/theme.dart';
-import 'package:shoestoreui/widgets/add_to_cart.dart';
-import 'package:shoestoreui/widgets/buy_now.dart';
-import 'package:shoestoreui/widgets/fav_button.dart';
-import 'package:shoestoreui/widgets/rating.dart';
-import 'package:shoestoreui/widgets/selection_button.dart';
+import 'package:provider/provider.dart';
+import 'package:ekraft/config/data.dart';
+import 'package:ekraft/models/shoe.dart';
+import 'package:ekraft/provider/cart.dart';
+import 'package:ekraft/utils/theme.dart';
+import 'package:ekraft/widgets/add_to_cart.dart';
+import 'package:ekraft/widgets/buy_now.dart';
+import 'package:ekraft/widgets/fav_button.dart';
+import 'package:ekraft/widgets/rating.dart';
 
 class ShoeDetails extends StatefulWidget {
-  final Shoe shoe;
+  final Product shoe;
   const ShoeDetails(
     this.shoe, {
     Key? key,
@@ -21,26 +23,8 @@ class ShoeDetails extends StatefulWidget {
 }
 
 class _ShoeDetailsState extends State<ShoeDetails> {
-  int _selectedSize = 39;
-
-  void updateSelectedSize(int size) {
-    setState(() {
-      _selectedSize = size;
-    });
-  }
-
-  late Color _selectedColor;
-
-  void updateSelectedColor(Color color) {
-    setState(() {
-      _selectedColor = color;
-    });
-  }
-
   @override
   void initState() {
-    _selectedColor =
-        widget.shoe.colors[Random().nextInt(widget.shoe.colors.length)];
     super.initState();
   }
 
@@ -83,7 +67,7 @@ class _ShoeDetailsState extends State<ShoeDetails> {
                   ],
                 ),
                 decoration: BoxDecoration(
-                  color: _selectedColor,
+                  color: Colors.grey[400],
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
@@ -114,46 +98,67 @@ class _ShoeDetailsState extends State<ShoeDetails> {
               const SizedBox(
                 height: 20,
               ),
-              const Text("Sizes"),
+              const Text(
+                "Description",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
               const SizedBox(
                 height: 10,
               ),
-              Row(
-                children: widget.shoe.sizes
-                    .map(
-                      (e) => SelectionButton<int>(
-                        value: e,
-                        selectedValue: _selectedSize,
-                        updateValue: updateSelectedSize,
-                      ),
-                    )
-                    .toList(),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text("Colors"),
+              Text(widget.shoe.description),
               const SizedBox(
                 height: 10,
-              ),
-              Row(
-                children: widget.shoe.colors
-                    .map(
-                      (e) => SelectionButton<Color>(
-                        value: e,
-                        selectedValue: _selectedColor,
-                        updateValue: updateSelectedColor,
-                      ),
-                    )
-                    .toList(),
               ),
               const Spacer(),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
-                  AddToCart(),
-                  BuyNow(),
+                children: [
+                  AddToCart(
+                    onPressed: () {
+                      if (!isAuthenticated) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            duration: Duration(milliseconds: 1500),
+                            backgroundColor: StoreTheme.primaryColor,
+                            content: Center(
+                              child: Text("Product added to cart."),
+                            ),
+                          ),
+                        );
+
+                        Cart cart = Provider.of<Cart>(context, listen: false);
+                        cart.addItem(widget.shoe);
+                        Future.delayed(const Duration(milliseconds: 2500), () {
+                          Navigator.pop(context);
+                        });
+                      }
+                    },
+                  ),
+                  BuyNow(
+                    onPressed: () {
+                      if (isAuthenticated) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AuthenticationScreen(
+                              showAppBar: true,
+                            ),
+                          ),
+                        );
+                      } else {
+                        Cart cart = Provider.of<Cart>(context, listen: false);
+                        confirmOrder(
+                          context,
+                          cart,
+                          shouldPop: true,
+                          product: widget.shoe,
+                        );
+                      }
+                    },
+                  ),
                 ],
               )
             ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shoestoreui/screens/home.dart';
-import 'package:shoestoreui/utils/theme.dart';
+import 'package:provider/provider.dart';
+import 'package:ekraft/provider/cart.dart';
+import 'package:ekraft/screens/home.dart';
+import 'package:ekraft/utils/theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,11 +13,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Shoe Store UI',
-      theme: StoreTheme.theme,
-      home: const Home(),
+    GlobalKey<ScaffoldMessengerState> scaffoldKey =
+        GlobalKey<ScaffoldMessengerState>();
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(
+          value: Cart(),
+        )
+      ],
+      child: MaterialApp(
+        scaffoldMessengerKey: scaffoldKey,
+        debugShowCheckedModeBanner: false,
+        title: 'Shoe Store UI',
+        theme: StoreTheme.theme,
+        home: const Home(),
+      ),
     );
   }
 }

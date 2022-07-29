@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shoestoreui/utils/theme.dart';
-import 'package:shoestoreui/widgets/field.dart';
+import 'package:ekraft/utils/theme.dart';
+import 'package:ekraft/widgets/field.dart';
 
 class StoreSearch extends StatelessWidget {
   const StoreSearch({

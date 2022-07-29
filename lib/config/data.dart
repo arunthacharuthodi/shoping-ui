@@ -1,38 +1,38 @@
-import 'package:shoestoreui/models/shoe.dart';
+import 'package:ekraft/models/shoe.dart';
 
 class ShoeStore {
-  static List<Shoe> shoes = [
-    Shoe(
+  static List<Product> shoes = [
+    Product(
       name: "Nike Blue Outdoor Sport",
       image: "nike-blue.png",
       price: 24.50,
       rating: 4.7,
     ),
-    Shoe(
+    Product(
       name: "Nike Neon Green Shoes",
       image: "nike-neon.png",
       price: 32.70,
       rating: 4.9,
     ),
-    Shoe(
+    Product(
       name: "Adidas Pink Sport Shoes",
       image: "adidas-pink.png",
       price: 56.50,
       rating: 3.8,
     ),
-    Shoe(
+    Product(
       name: "Nike Red Black Sport",
       image: "nike-red-black.png",
       price: 143.0,
       rating: 5,
     ),
-    Shoe(
+    Product(
       name: "Adidas Outdoor Sport",
       image: "adidas-sport-outside.png",
       price: 62.80,
       rating: 4.2,
     ),
-    Shoe(
+    Product(
       name: "Nike Slim Sport Shoes",
       image: "nike-slim-sport.png",
       price: 92.80,
@@ -40,3 +40,5 @@ class ShoeStore {
     ),
   ];
 }
+
+bool isAuthenticated = false;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shoestoreui/config/data.dart';
-import 'package:shoestoreui/screens/details.dart';
-import 'package:shoestoreui/utils/slide.dart';
-import 'package:shoestoreui/utils/theme.dart';
-import 'package:shoestoreui/widgets/fav_button.dart';
+import 'package:ekraft/config/data.dart';
+import 'package:ekraft/screens/details.dart';
+import 'package:ekraft/utils/slide.dart';
+import 'package:ekraft/utils/theme.dart';
+import 'package:ekraft/widgets/fav_button.dart';
 
 class ItemsGridView extends StatefulWidget {
   const ItemsGridView({
@@ -19,8 +19,9 @@ class _ItemsGridViewState extends State<ItemsGridView> {
   Widget build(BuildContext context) {
     return Expanded(
       child: GridView.count(
+        childAspectRatio: 1.5,
         shrinkWrap: true,
-        crossAxisCount: 2,
+        crossAxisCount: 1,
         children: ShoeStore.shoes
             .map(
               (e) => GestureDetector(

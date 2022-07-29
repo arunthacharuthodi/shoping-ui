@@ -22,16 +22,6 @@ class StoreBottomNavigation extends StatelessWidget {
           label: "Explore",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite),
-          label: "Favourite",
-        ),
-        BottomNavigationBarItem(
-          icon: ImageIcon(
-            AssetImage("assets/images/apps_filled.png"),
-          ),
-          label: "Store",
-        ),
-        BottomNavigationBarItem(
           icon: Icon(Icons.shopping_cart),
           label: "Cart",
         ),

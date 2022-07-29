@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:shoestoreui/models/shoe.dart';
-import 'package:shoestoreui/utils/theme.dart';
+import 'package:ekraft/models/shoe.dart';
+import 'package:ekraft/utils/theme.dart';
 
 class FavButton extends StatelessWidget {
   final VoidCallback? onTap;
-  final Shoe shoe;
+  final Product shoe;
 
   const FavButton(this.shoe, {Key? key, this.onTap}) : super(key: key);
 

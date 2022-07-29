@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoestoreui/utils/theme.dart';
+import 'package:ekraft/utils/theme.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:shoestoreui/utils/theme.dart';
+import 'package:ekraft/utils/theme.dart';
 
 class AddToCart extends StatelessWidget {
+  final VoidCallback onPressed;
   const AddToCart({
     Key? key,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -11,7 +13,7 @@ class AddToCart extends StatelessWidget {
     return SizedBox(
       width: 150,
       child: TextButton.icon(
-        onPressed: () {},
+        onPressed: onPressed,
         icon: const Icon(Icons.shopping_cart),
         label: const Text("Add to Cart"),
         style: ButtonStyle(
