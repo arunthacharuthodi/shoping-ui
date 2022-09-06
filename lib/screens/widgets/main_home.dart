@@ -12,7 +12,6 @@ class ActualHome extends StatelessWidget {
     return Column(
       children: const [
         StoreSearch(),
-        // StoreTabs(),
         SizedBox(
           height: 10,
         ),

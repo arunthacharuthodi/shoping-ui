@@ -1,7 +1,7 @@
 import 'package:ekraft/screens/settings/settings.dart';
 import 'package:ekraft/screens/widgets/main_home.dart';
 import 'package:flutter/material.dart';
-import 'package:ekraft/screens/cart.dart';
+import 'package:ekraft/screens/auth/cart.dart';
 import 'package:ekraft/widgets/bottom_nav.dart';
 import 'package:ekraft/widgets/menu_button.dart';
 
@@ -61,6 +61,12 @@ class HomeState extends State<Home> {
     }
     if (page == 1) {
       return const CartScreen();
+    }
+
+    if (page == 2) {
+      return const Center(
+        child: Text("Profile"),
+      );
     }
     return const ActualHome();
   }
