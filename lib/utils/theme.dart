@@ -18,6 +18,12 @@ class StoreTheme {
           iconTheme: IconThemeData(
             color: black,
           ),
+          titleTextStyle: TextStyle(
+            color: black,
+            fontWeight: FontWeight.w600,
+            fontSize: 20,
+          ),
+          centerTitle: true,
         ),
         tabBarTheme: const TabBarTheme(
           labelColor: primaryColor,

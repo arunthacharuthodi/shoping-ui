@@ -22,7 +22,7 @@ class _ItemsGridViewState extends State<ItemsGridView> {
         childAspectRatio: 1.5,
         shrinkWrap: true,
         crossAxisCount: 1,
-        children: ShoeStore.shoes
+        children: Store.shoes
             .map(
               (e) => GestureDetector(
                 onTap: () {

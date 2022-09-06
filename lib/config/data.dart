@@ -1,6 +1,6 @@
 import 'package:ekraft/models/shoe.dart';
 
-class ShoeStore {
+class Store {
   static List<Product> shoes = [
     Product(
       name: "Nike Blue Outdoor Sport",

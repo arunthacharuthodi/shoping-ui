@@ -1,10 +1,9 @@
+import 'package:ekraft/screens/settings/settings.dart';
+import 'package:ekraft/screens/widgets/main_home.dart';
 import 'package:flutter/material.dart';
 import 'package:ekraft/screens/cart.dart';
-import 'package:ekraft/utils/theme.dart';
 import 'package:ekraft/widgets/bottom_nav.dart';
-import 'package:ekraft/widgets/items_grid.dart';
 import 'package:ekraft/widgets/menu_button.dart';
-import 'package:ekraft/widgets/search.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -43,11 +42,14 @@ class HomeState extends State<Home> {
   List<Widget> get actionButtons {
     return [
       IconButton(
-        onPressed: () {},
-        icon: const Icon(Icons.notifications_outlined),
-      ),
-      IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SettingsPage(),
+            ),
+          );
+        },
         icon: const Icon(Icons.settings_outlined),
       ),
     ];
@@ -61,44 +63,5 @@ class HomeState extends State<Home> {
       return const CartScreen();
     }
     return const ActualHome();
-  }
-}
-
-class ActualHome extends StatelessWidget {
-  const ActualHome({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const StoreSearch(),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TabBar(
-            isScrollable: true,
-            tabs: const [
-              Tab(text: 'All Shoes'),
-              Tab(text: 'New Arrivals'),
-              Tab(text: 'Best Sellers'),
-              Tab(text: 'Running'),
-              Tab(text: 'Jordan'),
-              Tab(text: 'Casual'),
-            ],
-            indicator: BoxDecoration(
-              color: StoreTheme.primaryColor,
-              borderRadius: BorderRadius.circular(100),
-            ),
-            labelColor: StoreTheme.white,
-            unselectedLabelColor: StoreTheme.black,
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        const ItemsGridView(),
-      ],
-    );
   }
 }
