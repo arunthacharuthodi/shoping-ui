@@ -1,3 +1,4 @@
+import 'package:ekraft/screens/profile/profile.dart';
 import 'package:ekraft/screens/settings/settings.dart';
 import 'package:ekraft/screens/widgets/main_home.dart';
 import 'package:flutter/material.dart';
@@ -64,9 +65,7 @@ class HomeState extends State<Home> {
     }
 
     if (page == 2) {
-      return const Center(
-        child: Text("Profile"),
-      );
+      return const ProfilePage();
     }
     return const ActualHome();
   }
