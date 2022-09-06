@@ -12,8 +12,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String pic =
-      "https://pbs.twimg.com/profile_images/1539694094187782144/Bzw2QRh__400x400.jpg";
+  String pic = "assets/images/abel.jpeg";
 
   final List<String> _options = [
     "Shipped Orders",
@@ -58,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(200),
-            child: Image.network(
+            child: Image.asset(
               pic,
               height: 150,
               width: 150,

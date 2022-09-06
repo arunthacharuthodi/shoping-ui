@@ -1,5 +1,7 @@
 import 'package:ekraft/screens/auth/auth.dart';
+import 'package:ekraft/screens/details/feedbacks.dart';
 import 'package:ekraft/utils/confirm.dart';
+import 'package:ekraft/utils/slide.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ekraft/config/data.dart';
@@ -31,7 +33,25 @@ class _ShoeDetailsState extends State<ShoeDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                slidingRoute(
+                  FeedbacksPage(
+                    productName: widget.shoe.name,
+                  ),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.chat_outlined,
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
@@ -75,10 +95,13 @@ class _ShoeDetailsState extends State<ShoeDetails> {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(
-                  widget.shoe.name,
-                  style: const TextStyle(
-                    fontSize: 22,
+                Hero(
+                  tag: "productname",
+                  child: Text(
+                    widget.shoe.name,
+                    style: const TextStyle(
+                      fontSize: 22,
+                    ),
                   ),
                 ),
                 const SizedBox(

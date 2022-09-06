@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ekraft/config/data.dart';
-import 'package:ekraft/screens/details.dart';
+import 'package:ekraft/screens/details/details.dart';
 import 'package:ekraft/utils/slide.dart';
 import 'package:ekraft/utils/theme.dart';
 import 'package:ekraft/widgets/fav_button.dart';

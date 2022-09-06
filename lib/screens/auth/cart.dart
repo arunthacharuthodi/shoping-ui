@@ -2,7 +2,7 @@ import 'package:ekraft/utils/confirm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ekraft/provider/cart.dart';
-import 'package:ekraft/screens/details.dart';
+import 'package:ekraft/screens/details/details.dart';
 import 'package:ekraft/utils/slide.dart';
 import 'package:ekraft/utils/theme.dart';
 
