@@ -1,25 +1,25 @@
-import 'package:ekraft/screens/auth/signup.dart';
+import 'package:ekraft/screens/auth/auth.dart';
 import 'package:ekraft/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ekraft/utils/theme.dart';
 
-class AuthenticationScreen extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
   final bool showAppBar;
-  const AuthenticationScreen({
+  const SignUpPage({
     Key? key,
     this.showAppBar = false,
   }) : super(key: key);
 
   @override
-  State<AuthenticationScreen> createState() => _AuthenticationScreenState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _AuthenticationScreenState extends State<AuthenticationScreen> {
+class _SignUpPageState extends State<SignUpPage> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    TextEditingController email = TextEditingController();
-    TextEditingController password = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Authentication'),
@@ -36,7 +36,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
               const SizedBox(height: 10),
               TextField(
                 controller: email,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: "you@something.com",
                 ),
@@ -47,7 +47,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
               TextField(
                 controller: password,
                 obscureText: true,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: "********",
                 ),
@@ -59,26 +59,24 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                   child: Column(
                     children: [
                       TextButton(
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => SignUpPage()));
-                        },
-                        child: Text("dont have a acound ? signup"),
-                      ),
-                      TextButton(
-                          onPressed: () async {
-                            try {
-                              await FirebaseAuth.instance
-                                  .signInWithEmailAndPassword(
-                                      email: email.text,
-                                      password: password.text);
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (_) => Home()));
-                            } on FirebaseAuthException catch (err) {
-                              print(err);
-                            }
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => AuthenticationScreen()));
                           },
-                          child: Text("signIn"))
+                          child: Text("already have a acound ? sign in")),
+                      TextButton(
+                        onPressed: () {
+                          FirebaseAuth auth = FirebaseAuth.instance;
+                          Future<UserCredential> user =
+                              auth.createUserWithEmailAndPassword(
+                                  email: email.text, password: password.text);
+                          user.whenComplete(() => Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => Home())));
+                        },
+                        child: Text("signup"),
+                      ),
                     ],
                   ),
                 ),

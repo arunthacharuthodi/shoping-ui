@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class RegisterSeller extends StatefulWidget {
@@ -8,6 +11,12 @@ class RegisterSeller extends StatefulWidget {
 }
 
 class _RegisterSellerState extends State<RegisterSeller> {
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController number = TextEditingController();
+  TextEditingController adress = TextEditingController();
+  TextEditingController product = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +46,8 @@ class _RegisterSellerState extends State<RegisterSeller> {
           ),
           Container(
             padding: const EdgeInsets.all(10),
-            child: const TextField(
+            child: TextField(
+              controller: name,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Enter your name',
@@ -55,7 +65,8 @@ class _RegisterSellerState extends State<RegisterSeller> {
           ),
           Container(
             padding: const EdgeInsets.all(10),
-            child: const TextField(
+            child: TextField(
+              controller: email,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Enter your email',
@@ -73,7 +84,8 @@ class _RegisterSellerState extends State<RegisterSeller> {
           ),
           Container(
             padding: const EdgeInsets.all(10),
-            child: const TextField(
+            child: TextField(
+              controller: number,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Enter your phone number',
@@ -91,7 +103,8 @@ class _RegisterSellerState extends State<RegisterSeller> {
           ),
           Container(
             padding: const EdgeInsets.all(10),
-            child: const TextField(
+            child: TextField(
+              controller: adress,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Enter your address',
@@ -109,7 +122,8 @@ class _RegisterSellerState extends State<RegisterSeller> {
           ),
           Container(
             padding: const EdgeInsets.all(10),
-            child: const TextField(
+            child: TextField(
+              controller: product,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Enter product details',
@@ -122,7 +136,20 @@ class _RegisterSellerState extends State<RegisterSeller> {
           Container(
             padding: const EdgeInsets.all(10),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                String uid = FirebaseAuth.instance.currentUser!.uid;
+                DocumentReference ref = FirebaseFirestore.instance
+                    .collection("BecomeASeller")
+                    .doc(uid);
+                ref.set({
+                  "name": name.text,
+                  "email": email.text,
+                  "number": number.text,
+                  "adress": adress.text,
+                  "product": product.text,
+                  "is_aproved": false
+                });
+              },
               child: const Text("Submit"),
             ),
           ),

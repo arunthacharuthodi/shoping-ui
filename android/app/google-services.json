@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "704432428884",
+    "project_id": "ekart-2d1eb",
+    "storage_bucket": "ekart-2d1eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704432428884:android:2636f549ddbccdd74cdac1",
+        "android_client_info": {
+          "package_name": "com.owlverse.shoestoreui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704432428884-203in3ej12bvkvn3a5d3f23tfprmtcp8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP2QYLox0HssiHm5fPrqfPF1Vjz33JG00"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704432428884-203in3ej12bvkvn3a5d3f23tfprmtcp8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

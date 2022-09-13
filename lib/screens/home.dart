@@ -1,6 +1,8 @@
+import 'package:ekraft/screens/auth/auth.dart';
 import 'package:ekraft/screens/profile/profile.dart';
 import 'package:ekraft/screens/settings/settings.dart';
 import 'package:ekraft/screens/widgets/main_home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ekraft/screens/auth/cart.dart';
 import 'package:ekraft/widgets/bottom_nav.dart';
@@ -53,6 +55,14 @@ class HomeState extends State<Home> {
         },
         icon: const Icon(Icons.settings_outlined),
       ),
+      IconButton(
+        onPressed: () async {
+          FirebaseAuth.instance.signOut().whenComplete(() => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => AuthenticationScreen())));
+        },
+        icon: Icon(Icons.logout),
+      )
     ];
   }
 
